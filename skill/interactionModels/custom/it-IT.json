@@ -1,0 +1,198 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "list manager",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "SendShopListIntent",
+          "slots": [],
+          "samples": [
+            "invia lista spesa",
+            "invia lista spesa al gruppo",
+            "invia lista spesa al bot",
+            "invia lista spesa telegram",
+            "invia lista spesa al gruppo telegram"
+          ]
+        },
+        {
+          "name": "SendToDoListIntent",
+          "slots": [],
+          "samples": [
+            "invia lista cose da fare",
+            "invia lista cose da fare al gruppo",
+            "invia lista cose da fare al bot",
+            "invia lista cose da fare telegram",
+            "invia lista cose da fare al gruppo telegram"
+          ]
+        },
+        {
+          "name": "ConfigurationIntent",
+          "slots": [
+            {
+              "name": "chat_id",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "l\u0027identificativo della mia chat è {chat_id}",
+                "{chat_id} è l\u0027identificativo",
+                "L\u0027identificativo è {chat_id}",
+                "L\u0027identificativo fornito è {chat_id}",
+                "L\u0027identificativo fornito dal bot è {chat_id}",
+                "L\u0027id fornito dal bot è {chat_id}",
+                "L\u0027id fornito è {chat_id}",
+                "{chat_id}",
+                "{chat_id} è l\u0027id",
+                "L\u0027id è {chat_id}",
+                "L\u0027id della mia chat è {chat_id}"
+              ]
+            },
+            {
+              "name": "chat_type",
+              "type": "CHAT_TYPE",
+              "samples": [
+                "{chat_type} è il tipo",
+                "Il tipo è {chat_type}",
+                "{chat_type} è il tipo di chat",
+                "{chat_type}",
+                "La chat è del tipo {chat_type}",
+                "Il tipo della chat è {chat_type}"
+              ]
+            }
+          ],
+          "samples": [
+            "configurazione",
+            "avvia configurazione",
+            "configurazione con il bot",
+            "configurazione della skill",
+            "configura",
+            "inizio configurazione"
+          ]
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "Single",
+                "synonyms": [
+                  "Chat singola"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Group",
+                "synonyms": [
+                  "Chat di gruppo",
+                  "Chat gruppo"
+                ]
+              }
+            }
+          ],
+          "name": "CHAT_TYPE"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "ConfigurationIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "chat_id",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": true,
+              "prompts": {
+                "confirmation": "dummy",
+                "elicitation": "dummy"
+              }
+            },
+            {
+              "name": "chat_type",
+              "type": "CHAT_TYPE",
+              "elicitationRequired": true,
+              "confirmationRequired": true,
+              "prompts": {
+                "confirmation": "dummy",
+                "elicitation": "dummy"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "dummy",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Per collegare Alexa al bot AleXinator pronuncia l\u0027identificativo della chat fornito dal bot, solo la parte numerica"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Slot.1142046136032.1167405502440",
+        "variations": [
+          {
+            "type": "SSML",
+            "value": "\u003cspeak\u003eL\u0027identificativo della chat è \u003csay-as interpret-as\u003d\u0027digits\u0027\u003e{chat_id}\u003c/say-as\u003e, è corretto?\u003c/speak\u003e"
+          }
+        ]
+      },
+      {
+        "id": "dummy",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Di che tipo di chat si tratta?"
+          }
+        ]
+      },
+      {
+        "id": "dummy",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Il tipo di chat è {chat_type} , corretto?"
+          }
+        ]
+      },
+      {
+        "id": "dummy",
+        "variations": [
+          {
+            "type": "SSML",
+            "value": "\u003cspeak\u003eL\u0027identificativo della chat è \u003csay-as interpret-as\u003d\u0027digits\u0027\u003e {chat_id} \u003c/say-as\u003e e il tipo di chat è {chat_type} , corretto?\u003c/speak\u003e"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "16"
+}
