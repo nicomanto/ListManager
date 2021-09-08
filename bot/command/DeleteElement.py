@@ -58,7 +58,8 @@ class DeleteElementConversation:
                 update.message.chat_id, self.listName)]
             if myElement:
                 update.message.reply_text(
-                    "Scegli la lista a cui rimuovere gli elementi 🛍️\n\n/cancel",
+                    f"Scegli l'elemento da rimuovere nella lista *{self.listName}* 🛍️\n\n/cancel",
+                    parse_mode="markdown",
                     reply_markup=ReplyKeyboardMarkup(
                         keyboard=myElement, resize_keyboard=True, one_time_keyboard=True, input_field_placeholder='Quale elemento?'
                     ))
@@ -68,7 +69,7 @@ class DeleteElementConversation:
                 logger.warning(
                     f'List "{self.listName}" empty for chat_id "{chat_id}"')
                 update.message.reply_text(
-                    f"Non è presente nessun elemento nella lista {self.listName} ⚠️", reply_markup=ReplyKeyboardRemove())
+                    f"Non è presente nessun elemento nella lista *{self.listName}* ⚠️", parse_mode="markdown", reply_markup=ReplyKeyboardRemove())
         else:
             logger.warning(
                 f'No list "{self.listName}" for chat_id "{chat_id}"')
