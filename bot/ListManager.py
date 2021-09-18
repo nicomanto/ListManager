@@ -37,19 +37,19 @@ class ListManager:
         self.dictChatList[chat_id].update({listName: []})
         # update in db
         collection.update_one(
-            {"_id": chat_id}, {"$set": {"lists": self.dictChatList[chat_id]}})
+            {"_id": chat_id}, {"$set": {f"lists.{listName}": []}})
 
     def emptyList(self, chat_id, listName):
         self.dictChatList[chat_id][listName] = []
         # update in db
         collection.update_one(
-            {"_id": chat_id}, {"$set": {"lists": self.dictChatList[chat_id]}})
+            {"_id": chat_id}, {"$set": {f"lists.{listName}": []}})
 
     def deleteList(self, chat_id, listName):
         del self.dictChatList[chat_id][listName]
         # update in db
         collection.update_one(
-            {"_id": chat_id}, {"$set": {"lists": self.dictChatList[chat_id]}})
+            {"_id": chat_id}, {"$unset": {f"lists.{listName}": ""}})
 
     def elementIsPresent(self, chat_id, listName, element):
         return element in self.dictChatList[chat_id][listName]
@@ -58,14 +58,14 @@ class ListManager:
         self.dictChatList[chat_id][listName].remove(element)
         # update in db
         collection.update_one(
-            {"_id": chat_id}, {"$set": {"lists": self.dictChatList[chat_id]}})
+            {"_id": chat_id}, {"$pull": {f"lists.{listName}": element}})
 
     def addElementToList(self, chat_id, listName, element):
         self.dictChatList[chat_id][listName] = element + \
             self.dictChatList[chat_id].setdefault(listName, [])
         # update in db
         collection.update_one(
-            {"_id": chat_id}, {"$set": {"lists": self.dictChatList[chat_id]}})
+            {"_id": chat_id}, {"$push": {f"lists.{listName}": {"$each": element}}})
 
     def getElementsFromList(self, chat_id, listName):
         return self.dictChatList[chat_id][listName]
