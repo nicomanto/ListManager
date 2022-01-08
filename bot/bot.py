@@ -26,7 +26,7 @@ def checkUserBlockTheBot(list_manager, bot):
     while(True):
         logger.info("Check blocked bot")
         time.sleep(1500)  # 25 minutes
-        for x in list_manager.dictChatList.keys():
+        for x in list_manager.getAllChatId():
             try:
                 bot.sendChatAction(chat_id=x,
                                    action=ChatAction.TYPING)
